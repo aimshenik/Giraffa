@@ -46,6 +46,7 @@
                                           </HBox>
                                        </children>
                                     </VBox>
+                                    <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="960.0" text="All Solutions PLI Extract">
                                        <VBox.margin>
                                           <Insets left="20.0" />
                                        </VBox.margin>
