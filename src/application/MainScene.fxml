@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="700.0" maxWidth="1000.0" minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   <children>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TabPane prefHeight="700.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Solution assets">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0">
+                           <children>
+                              <VBox prefHeight="574.0" prefWidth="811.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox prefHeight="73.0" prefWidth="1000.0">
+                                       <children>
+                                          <Label prefHeight="17.0" prefWidth="338.0" text="Select Directory for extraction:">
+                                             <VBox.margin>
+                                                <Insets left="20.0" right="20.0" top="20.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <HBox prefHeight="49.0" prefWidth="1000.0">
+                                             <children>
+                                                <TextField fx:id="saSelectDirectoryTxtField" onMouseClicked="#selectDirectory" prefHeight="25.0" prefWidth="754.0">
+                                                   <HBox.margin>
+                                                      <Insets bottom="10.0" left="20.0" right="20.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" text="Select Directory">
+                                                   <HBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <Button mnemonicParsing="false" onAction="#clickBtn1" prefHeight="37.0" prefWidth="960.0" text="Extract">
+                                       <VBox.margin>
+                                          <Insets left="20.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                    <Separator prefHeight="7.0" prefWidth="1000.0">
+                                       <VBox.margin>
+                                          <Insets top="20.0" />
+                                       </VBox.margin></Separator>
+                                    <VBox>
+                                       <children>
+                                          <HBox prefHeight="26.0" prefWidth="1000.0">
+                                             <children>
+                                                <Label prefHeight="17.0" prefWidth="91.0" text="Solutions PLI list">
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" right="20.0" top="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="361.0" prefWidth="1000.0">
+                                             <children>
+                                                <Pane prefHeight="300.0" prefWidth="950.0">
+                                                   <children>
+                                                      <TextArea fx:id="filesTextArea" layoutX="-2.0" prefHeight="300.0" prefWidth="950.0" />
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </HBox.margin>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                          <Label text="Logs">
+                                             <VBox.margin>
+                                                <Insets left="20.0" right="20.0" top="20.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextArea maxHeight="230.0" maxWidth="950.0" prefHeight="230.0" prefWidth="900.0">
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="20.0" />
+                                             </VBox.margin>
+                                          </TextArea>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Client assets">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" />
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
