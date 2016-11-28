@@ -21,7 +21,20 @@ public class Controller {
 	
 
 	public void clickBtn1() {
-		System.out.println(saSelectDirectoryTxtField.getText());
+		saSelectDirectoryTxtField.clear();
+
+		final DirectoryChooser directoryChooser = new DirectoryChooser();
+		configuringDirectoryChooser(directoryChooser);
+		
+		File dir = directoryChooser.showDialog(saSelectDirectoryTxtField.getScene().getWindow());
+        if (dir != null) {
+        	saSelectDirectoryTxtField.setText(dir.getAbsolutePath());
+            System.out.println(dir.getAbsolutePath());
+            filesTextArea.setText(dir.getAbsolutePath());
+        } else {
+        	System.out.println("NULL");
+        }
+
 	}
 
 	public void selectDirectory() {

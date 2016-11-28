@@ -32,21 +32,20 @@
                                           </Label>
                                           <HBox prefHeight="49.0" prefWidth="1000.0">
                                              <children>
-                                                <TextField fx:id="saSelectDirectoryTxtField" onMouseClicked="#selectDirectory" prefHeight="25.0" prefWidth="754.0">
+                                                <TextField fx:id="saSelectDirectoryTxtField" editable="false" onMouseClicked="#selectDirectory" prefHeight="25.0" prefWidth="827.0">
                                                    <HBox.margin>
                                                       <Insets bottom="10.0" left="20.0" right="20.0" />
                                                    </HBox.margin>
                                                 </TextField>
-                                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" text="Select Directory">
+                                                <Button mnemonicParsing="false" onAction="#clickBtn1" prefHeight="25.0" prefWidth="119.0" text="Select">
                                                    <HBox.margin>
-                                                      <Insets bottom="10.0" />
+                                                      <Insets bottom="10.0" right="20.0" />
                                                    </HBox.margin>
                                                 </Button>
                                              </children>
                                           </HBox>
                                        </children>
                                     </VBox>
-                                    <Button mnemonicParsing="false" onAction="#clickBtn1" prefHeight="37.0" prefWidth="960.0" text="Extract">
                                        <VBox.margin>
                                           <Insets left="20.0" />
                                        </VBox.margin>
@@ -55,41 +54,49 @@
                                        <VBox.margin>
                                           <Insets top="20.0" />
                                        </VBox.margin></Separator>
-                                    <VBox>
+                                    <VBox prefHeight="521.0" prefWidth="1000.0">
                                        <children>
-                                          <HBox prefHeight="26.0" prefWidth="1000.0">
+                                          <HBox prefHeight="500.0" prefWidth="950.0">
                                              <children>
-                                                <Label prefHeight="17.0" prefWidth="91.0" text="Solutions PLI list">
-                                                   <HBox.margin>
-                                                      <Insets left="20.0" right="20.0" top="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                             </children>
-                                          </HBox>
-                                          <HBox prefHeight="361.0" prefWidth="1000.0">
-                                             <children>
-                                                <Pane prefHeight="300.0" prefWidth="950.0">
+                                                <VBox>
                                                    <children>
-                                                      <TextArea fx:id="filesTextArea" layoutX="-2.0" prefHeight="300.0" prefWidth="950.0" />
+                                                      <Label prefHeight="17.0" prefWidth="91.0" text="Solutions PLI list">
+                                                         <HBox.margin>
+                                                            <Insets left="20.0" right="20.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextArea fx:id="filesTextArea" editable="false" prefHeight="480.0" prefWidth="460.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox>
+                                                   <children>
+                                                      <Label text="Logs">
+                                                         <VBox.margin>
+                                                            <Insets left="30.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <TextArea editable="false" prefHeight="480.0" prefWidth="460.0">
+                                                         <VBox.margin>
+                                                            <Insets left="30.0" />
+                                                         </VBox.margin>
+                                                      </TextArea>
                                                    </children>
                                                    <HBox.margin>
-                                                      <Insets left="20.0" />
+                                                      <Insets />
                                                    </HBox.margin>
-                                                </Pane>
+                                                </VBox>
                                              </children>
+                                             <VBox.margin>
+                                                <Insets left="25.0" />
+                                             </VBox.margin>
                                           </HBox>
-                                          <Label text="Logs">
-                                             <VBox.margin>
-                                                <Insets left="20.0" right="20.0" top="20.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                          <TextArea maxHeight="230.0" maxWidth="950.0" prefHeight="230.0" prefWidth="900.0">
-                                             <VBox.margin>
-                                                <Insets bottom="10.0" left="20.0" />
-                                             </VBox.margin>
-                                          </TextArea>
                                        </children>
                                     </VBox>
+                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="41.0" text="Next">
+                                       <VBox.margin>
+                                          <Insets bottom="14.0" left="939.0" right="20.0" />
+                                       </VBox.margin>
+                                    </Button>
                                  </children>
                               </VBox>
                            </children>
@@ -98,9 +105,104 @@
                 </Tab>
                 <Tab text="Client assets">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" />
+                    <AnchorPane minHeight="0.0" minWidth="0.0">
+                           <children>
+                              <VBox prefHeight="671.0" prefWidth="1000.0">
+                                 <children>
+                                    <VBox prefHeight="130.0" prefWidth="1000.0">
+                                       <children>
+                                          <Label text="Select client's assens excel document">
+                                             <VBox.margin>
+                                                <Insets left="20.0" right="20.0" top="20.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <HBox prefHeight="27.0" prefWidth="1000.0">
+                                             <children>
+                                                <TextField editable="false" prefHeight="25.0" prefWidth="828.0">
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" right="20.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Select">
+                                                   <HBox.margin>
+                                                      <Insets right="20.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                          <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="960.0" text="Extract PLI from Solution Assets ">
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                    <Separator prefHeight="7.0" prefWidth="1000.0" />
+                                    <VBox prefHeight="521.0" prefWidth="1000.0">
+                                       <children>
+                                          <HBox prefHeight="500.0" prefWidth="950.0">
+                                             <children>
+                                                <VBox>
+                                                   <children>
+                                                      <Label prefHeight="17.0" prefWidth="91.0" text="Solutions PLI list">
+                                                         <HBox.margin>
+                                                            <Insets left="20.0" right="20.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextArea fx:id="filesTextArea1" editable="false" prefHeight="480.0" prefWidth="460.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox>
+                                                   <children>
+                                                      <Label text="Logs">
+                                                         <VBox.margin>
+                                                            <Insets left="30.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <TextArea editable="false" prefHeight="480.0" prefWidth="460.0">
+                                                         <VBox.margin>
+                                                            <Insets left="30.0" />
+                                                         </VBox.margin>
+                                                      </TextArea>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                </VBox>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="25.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <HBox>
+                                       <children>
+                                          <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="128.0" text="Previous">
+                                             <HBox.margin>
+                                                <Insets bottom="15.0" left="20.0" />
+                                             </HBox.margin>
+                                          </Button>
+                                          <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Next">
+                                             <VBox.margin>
+                                                <Insets bottom="15.0" left="920.0" right="20.0" />
+                                             </VBox.margin>
+                                             <HBox.margin>
+                                                <Insets left="840.0" right="20.0" />
+                                             </HBox.margin>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children></AnchorPane>
                   </content>
                 </Tab>
+                  <Tab text="Untitled Tab">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
               </tabs>
             </TabPane>
          </children>
