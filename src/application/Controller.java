@@ -54,6 +54,12 @@ public class Controller {
 
 	}
 
+	public void clickExtract() {
+		Exceller e = new Exceller();
+		
+		Logger.write(e.readAllFilesToString(saSelectDirectoryTxtField.getText()), logsTextArea);
+	}
+	
 	public void selectDirectory() {
 
 		if (saSelectDirectoryTxtField.getText().equals("Click me")) {
