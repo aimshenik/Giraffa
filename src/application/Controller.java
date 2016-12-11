@@ -1,6 +1,8 @@
 package application;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Date;
 
 import javafx.fxml.FXML;
@@ -14,14 +16,14 @@ public class Controller {
 	@FXML
 	private TextField saSelectDirectoryTxtField, saSelectFileTxtField;
 	@FXML
-	private TextArea filesTextArea, logsTextArea;
+	private TextArea logsTextArea, logsTextArea2, trPLITextArea, clientPLITextArea, clientSolutionsPLITextArea;
 	@FXML
 	private AnchorPane pliScrollPane;
 	@FXML
 	private Tab tabZero, tabOne, tabTwo;
 	@FXML
 	private TabPane tabPane;
-	
+
 	public void clickBtn1() {
 		final DirectoryChooser directoryChooser = new DirectoryChooser();
 		configuringDirectoryChooser(directoryChooser);
@@ -30,7 +32,6 @@ public class Controller {
 		if (dir != null) {
 			saSelectDirectoryTxtField.setText(dir.getAbsolutePath());
 			System.out.println(dir.getAbsolutePath());
-			filesTextArea.setText(dir.getAbsolutePath());
 		} else {
 			System.out.println("NULL");
 		}
@@ -45,21 +46,23 @@ public class Controller {
 		if (dir != null) {
 			saSelectFileTxtField.setText(dir.getAbsolutePath());
 			System.out.println(dir.getAbsolutePath());
-			filesTextArea.setText(dir.getAbsolutePath());
 		} else {
 			System.out.println("NULL");
 		}
-		
-		Logger.write("Selected Assets file = " + dir.getAbsolutePath(), logsTextArea);
+
+		Logger.write("Selected Assets file = " + dir.getAbsolutePath(), logsTextArea2);
 
 	}
 
-	public void clickExtract() {
-		Exceller e = new Exceller();
-		
-		Logger.write(e.readAllFilesToString(saSelectDirectoryTxtField.getText()), logsTextArea);
+	public void clickExtract() throws FileNotFoundException, IOException {
+		String filesNames = new Exceller().readAllFilesNamesToString(saSelectDirectoryTxtField.getText());
+		String filesContent = new Exceller().readAllFilesContentToString(saSelectDirectoryTxtField.getText());
+
+		Logger.write(filesNames, logsTextArea2);
+		Logger.write(filesContent, logsTextArea2);
+		Logger.write(filesContent, trPLITextArea);
 	}
-	
+
 	public void selectDirectory() {
 
 		if (saSelectDirectoryTxtField.getText().equals("Click me")) {
@@ -73,7 +76,6 @@ public class Controller {
 			if (dir != null) {
 				saSelectDirectoryTxtField.setText(dir.getAbsolutePath());
 				System.out.println(dir.getAbsolutePath());
-				filesTextArea.setText(dir.getAbsolutePath());
 			} else {
 				System.out.println("NULL");
 			}
