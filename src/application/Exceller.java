@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -35,42 +39,82 @@ public class Exceller {
 		File[] f2 = f.listFiles();
 		String s = "Суммарный текст всех файлов: ";
 		for (File file : f2) {
-			XSSFWorkbook myExcelBook = new XSSFWorkbook(new FileInputStream(file));
+			s = (file.getName().endsWith(".xls") || file.getName().endsWith(".XLS")) ? s + excelXLSHandler(file)
+					: s + excelXLSTHandler(file);
+		}
+		return s;
+	}
+
+	private String excelXLSHandler(File file) throws FileNotFoundException, IOException {
+		HSSFWorkbook myExcelBook = new HSSFWorkbook(new FileInputStream(file));
+		String s = "";
+		// console
+		System.out.println("в файле " + file.getName() + " " + myExcelBook.getNumberOfSheets() + " Закладок");
+		for (int i = 0; i < myExcelBook.getNumberOfSheets(); i++) {
+			HSSFSheet currentSheet = myExcelBook.getSheetAt(i);
+			int rowNumber = currentSheet.getPhysicalNumberOfRows(), firstrowNumber = currentSheet.getFirstRowNum(),
+					lastrowNumber = currentSheet.getLastRowNum();
 			// console
-			System.out.println("в файле " + file.getName() + " " + myExcelBook.getNumberOfSheets() + " Закладок");
-			for (int i = 0; i < myExcelBook.getNumberOfSheets(); i++) {
-				XSSFSheet currentSheet = myExcelBook.getSheetAt(i);
-				int rowNumber = currentSheet.getPhysicalNumberOfRows(), firstrowNumber = currentSheet.getFirstRowNum(),
-						lastrowNumber = currentSheet.getLastRowNum();
-				// console
-				System.out.println("\t В за кладке " + i + " всего строк " + rowNumber + ", первая - " + firstrowNumber
-						+ ", последняя - " + lastrowNumber);
+			System.out.println("\t В за кладке " + i + " всего значимых строк " + rowNumber + ", первая - "
+					+ firstrowNumber + ", последняя - " + lastrowNumber);
 
-				for (int j = firstrowNumber; j <= lastrowNumber; j++) {
-					XSSFRow currentRow = currentSheet.getRow(j);
+			for (int j = firstrowNumber; j <= lastrowNumber; j++) {
+				HSSFRow currentRow = currentSheet.getRow(j);
 
-					if (currentRow != null) {
-						System.out.println("перехватили NOT NULL");
+				if (currentRow != null) {
+					int firstcellNumber = currentRow.getFirstCellNum(), lastcellNumber = currentRow.getLastCellNum();
 
-						int firstcellNumber = currentRow.getFirstCellNum(),
-								lastcellNumber = currentRow.getLastCellNum();
-
-						for (int k = firstcellNumber; k <= lastcellNumber; k++) {
-							System.out.println("пытаемся собрать данные из строки " + k);
-							s = (currentRow.getCell(k) != null)
-									? s + currentRow.getCell(k).toString() + " " : s;
-						}
-
+					for (int k = firstcellNumber; k <= lastcellNumber; k++) {
+						// console
+						System.out.println("пытаемся собрать данные из строки " + k);
+						s = (currentRow.getCell(k) != null) ? s + currentRow.getCell(k).toString() + " " : s;
 					}
-				}
 
+				}
 			}
-			// console
-			System.out.println(s);
-			myExcelBook.close();
-			
 
 		}
+		// console
+		System.out.println(s);
+		myExcelBook.close();
+
+		return s;
+
+	}
+
+	private String excelXLSTHandler(File file) throws FileNotFoundException, IOException {
+		XSSFWorkbook myExcelBook = new XSSFWorkbook(new FileInputStream(file));
+		String s = "";
+		// console
+		System.out.println("в файле " + file.getName() + " " + myExcelBook.getNumberOfSheets() + " Закладок");
+		for (int i = 0; i < myExcelBook.getNumberOfSheets(); i++) {
+			XSSFSheet currentSheet = myExcelBook.getSheetAt(i);
+			int rowNumber = currentSheet.getPhysicalNumberOfRows(), firstrowNumber = currentSheet.getFirstRowNum(),
+					lastrowNumber = currentSheet.getLastRowNum();
+			// console
+			System.out.println("\t В за кладке " + i + " всего значимых строк " + rowNumber + ", первая - "
+					+ firstrowNumber + ", последняя - " + lastrowNumber);
+
+			for (int j = firstrowNumber; j <= lastrowNumber; j++) {
+				XSSFRow currentRow = currentSheet.getRow(j);
+
+				if (currentRow != null) {
+					int firstcellNumber = currentRow.getFirstCellNum(), lastcellNumber = currentRow.getLastCellNum();
+
+					for (int k = firstcellNumber; k <= lastcellNumber; k++) {
+						// console
+						System.out.println("пытаемся собрать данные из строки " + k);
+						s = (currentRow.getCell(k) != null) ? s + currentRow.getCell(k).toString() + " " : s;
+					}
+
+				}
+			}
+
+		}
+		// console
+		System.out.println(s);
+		myExcelBook.close();
+
 		return s;
 	}
 

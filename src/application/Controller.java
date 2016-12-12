@@ -55,6 +55,7 @@ public class Controller {
 	}
 
 	public void clickExtract() throws FileNotFoundException, IOException {
+		
 		String filesNames = new Exceller().readAllFilesNamesToString(saSelectDirectoryTxtField.getText());
 		String filesContent = new Exceller().readAllFilesContentToString(saSelectDirectoryTxtField.getText());
 
