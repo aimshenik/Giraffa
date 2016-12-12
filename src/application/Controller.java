@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 
 public class Controller {
 
@@ -39,29 +40,33 @@ public class Controller {
 	}
 
 	public void clickBtn2() {
-		final DirectoryChooser directoryChooser = new DirectoryChooser();
-		configuringDirectoryChooser(directoryChooser);
+		final FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Select client's assets excel file");
+		//fileChooser.showOpenDialog(saSelectDirectoryTxtField.getScene().getWindow());
 
-		File dir = directoryChooser.showDialog(saSelectFileTxtField.getScene().getWindow());
-		if (dir != null) {
-			saSelectFileTxtField.setText(dir.getAbsolutePath());
-			System.out.println(dir.getAbsolutePath());
+		File file  = fileChooser.showOpenDialog(saSelectDirectoryTxtField.getScene().getWindow());
+		if (file  != null) {
+			saSelectFileTxtField.setText(file.getAbsolutePath());
 		} else {
 			System.out.println("NULL");
 		}
 
-		Logger.write("Selected Assets file = " + dir.getAbsolutePath(), logsTextArea2);
+		Logger.write("Selected Assets file = " + file.getAbsolutePath(), logsTextArea2);
 
 	}
 
 	public void clickExtract() throws FileNotFoundException, IOException {
+		Exceller e = new Exceller();
 		
-		String filesNames = new Exceller().readAllFilesNamesToString(saSelectDirectoryTxtField.getText());
-		String filesContent = new Exceller().readAllFilesContentToString(saSelectDirectoryTxtField.getText());
-
+		
+		String filesNames = e.readAllFilesNamesToString(saSelectDirectoryTxtField.getText());
+		String filesContent = e.readAllFilesContentToString(saSelectDirectoryTxtField.getText());
+		String clientAssets = e.readClientsAssetsToString(saSelectFileTxtField.getText());
+		
 		Logger.write(filesNames, logsTextArea2);
 		Logger.write(filesContent, logsTextArea2);
 		Logger.write(filesContent, trPLITextArea);
+		Logger.write(clientAssets, clientPLITextArea);
 	}
 
 	public void selectDirectory() {

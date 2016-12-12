@@ -39,10 +39,23 @@ public class Exceller {
 		File[] f2 = f.listFiles();
 		String s = "Суммарный текст всех файлов: ";
 		for (File file : f2) {
-			s = (file.getName().endsWith(".xls") || file.getName().endsWith(".XLS")) ? s + excelXLSHandler(file)
-					: s + excelXLSTHandler(file);
+			if (file.isFile()) {
+				s = (file.getName().endsWith(".xls") || file.getName().endsWith(".XLS")) ? s + excelXLSHandler(file)
+						: s + excelXLSTHandler(file);
+			}
 		}
 		return s;
+	}
+
+	public String readClientsAssetsToString(String pathToFolder) throws FileNotFoundException, IOException {
+		File file = new File(pathToFolder);
+		if (file.isFile()) {
+			return (file.getName().endsWith(".xls") || file.getName().endsWith(".XLS")) ? excelXLSAssetsHandler(file)
+					: excelXLSXAssetsHandler(file);
+		} else {
+			return "Client's assets is not the file!";
+		}
+
 	}
 
 	private String excelXLSHandler(File file) throws FileNotFoundException, IOException {
@@ -111,6 +124,65 @@ public class Exceller {
 			}
 
 		}
+		// console
+		System.out.println(s);
+		myExcelBook.close();
+
+		return s;
+	}
+
+	private String excelXLSAssetsHandler(File file) throws FileNotFoundException, IOException {
+		HSSFWorkbook myExcelBook = new HSSFWorkbook(new FileInputStream(file));
+		String s = "";
+
+		HSSFSheet currentSheet = myExcelBook.getSheetAt(0);
+		HSSFRow currentRow = currentSheet.getRow(0);
+
+		int pliCellNumber = 0, pliDescCellNumber = 0;
+
+		if (currentRow != null) {
+			int lastcellNumber = currentRow.getLastCellNum();
+
+			for (int k = 0; k <= lastcellNumber; k++) {
+				if (currentRow.getCell(k).toString().equals("PLI")) {
+					pliCellNumber = k;
+				} else if (currentRow.getCell(k).toString().equals("Product Name : PLI")) {
+					pliDescCellNumber = k;
+				}
+			}
+			System.out.println("pliCellNumber = " + pliCellNumber + "; pliDescCellNumber = " + pliDescCellNumber);
+		}
+
+		// console
+		System.out.println(s);
+		myExcelBook.close();
+
+		return s;
+	}
+
+	private String excelXLSXAssetsHandler(File file) throws FileNotFoundException, IOException {
+		XSSFWorkbook myExcelBook = new XSSFWorkbook(new FileInputStream(file));
+		String s = "";
+
+		XSSFSheet currentSheet = myExcelBook.getSheetAt(0);
+		XSSFRow currentRow = currentSheet.getRow(0);
+
+		int pliCellNumber = 0, pliDescCellNumber = 0;
+
+		if (currentRow != null) {
+			int lastcellNumber = currentRow.getLastCellNum();
+
+			for (int k = 0; k <= lastcellNumber; k++) {
+
+				if (currentRow.getCell(k) != null && currentRow.getCell(k).toString().equals("PLI")) {
+					pliCellNumber = k;
+				} else if (currentRow.getCell(k).toString().equals("Product Name : PLI")) {
+					pliDescCellNumber = k;
+				}
+			}
+			System.out.println("pliCellNumber = " + pliCellNumber + "; pliDescCellNumber = " + pliDescCellNumber);
+		}
+
 		// console
 		System.out.println(s);
 		myExcelBook.close();

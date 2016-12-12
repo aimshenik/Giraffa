@@ -22,7 +22,7 @@
                      <children>
                         <AnchorPane prefHeight="62.0" prefWidth="1004.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#clickBtn1" prefHeight="25.0" prefWidth="100.0" text="Select" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0" />
+                              <Button mnemonicParsing="false" onAction="#clickBtn1" prefHeight="25.0" prefWidth="100.0" text="Select dir" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0" />
                               <TextField fx:id="saSelectDirectoryTxtField" editable="false" onMouseClicked="#selectDirectory" prefHeight="25.0" prefWidth="827.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="30.0">
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="20.0" right="20.0" />
@@ -113,7 +113,7 @@
                         </AnchorPane>
                         <AnchorPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#clickBtn2" prefHeight="25.0" prefWidth="100.0" text="Select" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="20.0" />
+                              <Button mnemonicParsing="false" onAction="#clickBtn2" prefHeight="25.0" prefWidth="100.0" text="Select file" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="20.0" />
                               <TextField fx:id="saSelectFileTxtField" editable="false" onMouseClicked="#selectDirectory" prefHeight="25.0" prefWidth="827.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="140.0">
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="20.0" right="20.0" />
