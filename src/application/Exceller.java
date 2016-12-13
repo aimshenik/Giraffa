@@ -8,14 +8,18 @@ import java.io.IOException;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.NPOIFSFileSystem;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class Exceller {
 
-	public void createEmpty() {
+	private String trPLI = "";
+	private String compared = "";
 
+	public String getCompared() {
+		return compared;
 	}
 
 	public String readAllFilesNamesToString(String pathTofolder) {
@@ -44,6 +48,7 @@ public class Exceller {
 						: s + excelXLSTHandler(file);
 			}
 		}
+		trPLI = s;
 		return s;
 	}
 
@@ -132,61 +137,98 @@ public class Exceller {
 	}
 
 	private String excelXLSAssetsHandler(File file) throws FileNotFoundException, IOException {
-		HSSFWorkbook myExcelBook = new HSSFWorkbook(new FileInputStream(file));
+		
 		String s = "";
-
+		String s2 = "";
+		
+		HSSFWorkbook myExcelBook = new HSSFWorkbook(new FileInputStream(file));
+		
 		HSSFSheet currentSheet = myExcelBook.getSheetAt(0);
-		HSSFRow currentRow = currentSheet.getRow(0);
+		HSSFRow zeroRow = currentSheet.getRow(0);
 
 		int pliCellNumber = 0, pliDescCellNumber = 0;
 
-		if (currentRow != null) {
-			int lastcellNumber = currentRow.getLastCellNum();
+		if (zeroRow != null) {
+			int lastcellNumber = zeroRow.getLastCellNum();
 
 			for (int k = 0; k <= lastcellNumber; k++) {
-				if (currentRow.getCell(k).toString().equals("PLI")) {
+
+				if (zeroRow.getCell(k) != null && zeroRow.getCell(k).toString().equals("PLI")) {
 					pliCellNumber = k;
-				} else if (currentRow.getCell(k).toString().equals("Product Name : PLI")) {
+				} else if (zeroRow.getCell(k) != null && zeroRow.getCell(k).toString().equals("Product Name : PLI")) {
 					pliDescCellNumber = k;
 				}
 			}
 			System.out.println("pliCellNumber = " + pliCellNumber + "; pliDescCellNumber = " + pliDescCellNumber);
 		}
 
+		for (int i = 1; i < currentSheet.getLastRowNum(); i++) {
+			HSSFRow currentRow = currentSheet.getRow(i);
+			s = (currentRow != null && currentRow.getCell(pliCellNumber) != null
+					&& currentRow.getCell(pliCellNumber).toString().length() != 0)
+							? s + "\t'" + currentRow.getCell(pliCellNumber).toString() + "' | '"
+									+ currentRow.getCell(pliDescCellNumber).toString() + "'\n"
+							: s;
+			s2 = (currentRow != null && currentRow.getCell(pliCellNumber) != null
+					&& currentRow.getCell(pliCellNumber).toString().length() != 0
+					&& trPLI.contains(currentRow.getCell(pliCellNumber).toString()))
+							? s2 + "\t'" + currentRow.getCell(pliCellNumber).toString() + "' | '"
+									+ currentRow.getCell(pliDescCellNumber).toString() + "'\n"
+							: s2;
+		}
+
 		// console
 		System.out.println(s);
 		myExcelBook.close();
 
+		compared = s2;
 		return s;
 	}
 
 	private String excelXLSXAssetsHandler(File file) throws FileNotFoundException, IOException {
 		XSSFWorkbook myExcelBook = new XSSFWorkbook(new FileInputStream(file));
 		String s = "";
+		String s2 = "";
 
 		XSSFSheet currentSheet = myExcelBook.getSheetAt(0);
-		XSSFRow currentRow = currentSheet.getRow(0);
+		XSSFRow zeroRow = currentSheet.getRow(0);
 
 		int pliCellNumber = 0, pliDescCellNumber = 0;
 
-		if (currentRow != null) {
-			int lastcellNumber = currentRow.getLastCellNum();
+		if (zeroRow != null) {
+			int lastcellNumber = zeroRow.getLastCellNum();
 
 			for (int k = 0; k <= lastcellNumber; k++) {
 
-				if (currentRow.getCell(k) != null && currentRow.getCell(k).toString().equals("PLI")) {
+				if (zeroRow.getCell(k) != null && zeroRow.getCell(k).toString().equals("PLI")) {
 					pliCellNumber = k;
-				} else if (currentRow.getCell(k).toString().equals("Product Name : PLI")) {
+				} else if (zeroRow.getCell(k) != null && zeroRow.getCell(k).toString().equals("Product Name : PLI")) {
 					pliDescCellNumber = k;
 				}
 			}
 			System.out.println("pliCellNumber = " + pliCellNumber + "; pliDescCellNumber = " + pliDescCellNumber);
 		}
 
+		for (int i = 1; i < currentSheet.getLastRowNum(); i++) {
+			XSSFRow currentRow = currentSheet.getRow(i);
+			s = (currentRow != null && currentRow.getCell(pliCellNumber) != null
+					&& currentRow.getCell(pliCellNumber).toString().length() != 0)
+							? s + "\t'" + currentRow.getCell(pliCellNumber).toString() + "' | '"
+									+ currentRow.getCell(pliDescCellNumber).toString() + "'\n"
+							: s;
+			s2 = (currentRow != null && currentRow.getCell(pliCellNumber) != null
+					&& currentRow.getCell(pliCellNumber).toString().length() != 0
+					&& trPLI.contains(currentRow.getCell(pliCellNumber).toString()))
+							? s2 + "\t'" + currentRow.getCell(pliCellNumber).toString() + "' | '"
+									+ currentRow.getCell(pliDescCellNumber).toString() + "'\n"
+							: s2;
+		}
+
 		// console
 		System.out.println(s);
 		myExcelBook.close();
 
+		compared = s2;
 		return s;
 	}
 

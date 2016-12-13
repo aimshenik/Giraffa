@@ -67,6 +67,7 @@ public class Controller {
 		Logger.write(filesContent, logsTextArea2);
 		Logger.write(filesContent, trPLITextArea);
 		Logger.write(clientAssets, clientPLITextArea);
+		Logger.write(e.getCompared(), clientSolutionsPLITextArea);
 	}
 
 	public void selectDirectory() {
